@@ -7,9 +7,15 @@
 # ✔ Имя должно начинаться с заглавной буквы, состоять из 4-7 букв, среди которых обязательно должны быть гласные.
 # ✔ Полученные имена сохраните в файл.
 
-import sys
+import argparse
 import random
 import logging
+
+parser = argparse.ArgumentParser(description='генерация псевдоимен с сохранением в файл')
+parser.add_argument('file_name', type=str, help='имя файла для сохранения псевдоимен')
+parser.add_argument('num_names', type=int, help='количество псевдоимен')
+args = parser.parse_args()
+
 
 FORMAT = '{levelname:<8} - {asctime}. В модуле "{name}" функция "{funcName}()" в {created} записала сообщение: {message}'
 
@@ -31,13 +37,7 @@ def gen_names(file_name, num_names):
             f.write(stroka)
             logger.info(stroka)
 
-# gen_names('words.txt', 10)
-
-if __name__ == '__main__':
-    if len(sys.argv) == 3:
-        gen_names(sys.argv[1], int(sys.argv[2]))
-    else:
-        print('Используйте ввод формата: python file_name.py file_name num_names')
+gen_names(args.file_name, args.num_names)
 
 
 # запуск из командной строки: python .\home_work_3.py words.txt 10

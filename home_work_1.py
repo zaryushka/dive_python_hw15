@@ -5,7 +5,7 @@
 
 # нахождение корней квадратного уравнения
 
-import sys
+import argparse
 import logging
 import math
 
@@ -31,14 +31,16 @@ def square_root(a, b, c):
         x1 = (-b)/(2*a)
         return f'x1 = x2 = {x1}'
 
-if __name__ == '__main__':
-    if len(sys.argv) == 4:
-        a = int(sys.argv[1])
-        b = int(sys.argv[2])
-        c = int(sys.argv[3])
-        print(square_root(a, b, c))
-    else:
-        print('Используйте ввод формата: python file_name.py a b c')
+
+parser = argparse.ArgumentParser(description='вычисление корней квадратного уравнения')
+parser.add_argument('a', type=float, help='коэффициент a')
+parser.add_argument('b', type=float, help='коэффициент b')
+parser.add_argument('c', type=float, help='коэффициент c')
+
+args = parser.parse_args()
+result = square_root(args.a, args.b, args.c)
+print(result)
+
 
     
 # запуск из командной строки: python home_work_1.py 0 2 3
